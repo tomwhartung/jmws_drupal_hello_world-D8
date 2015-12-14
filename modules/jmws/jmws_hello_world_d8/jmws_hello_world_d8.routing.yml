@@ -1,0 +1,7 @@
+jmws_hello_world_d8.content:
+  path: '/jmws_hello_world_d8'
+  defaults:
+    _controller: '\Drupal\jmws_hello_world_d8\Controller\JmwsHelloWorldD8Controller::content'
+    _title: 'The jmws_hello_world_d8 Module'
+  requirements:
+    _permission: 'access content'
