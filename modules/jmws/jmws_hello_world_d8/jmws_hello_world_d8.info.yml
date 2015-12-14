@@ -2,6 +2,11 @@ name: jmws_hello_world_d8
 type: module
 description: 'Create a basic module so we can figure out how to do more challenging stuff, like provide device-specific menus and content, which is the ultimate goal.'
 package: Jmws
-version: '1.0'
 core: '8.x'
 
+configure: jmws_hello_world_d8.settings
+#
+# Note: do not add the 'version'  property yourself!
+# It will be added automatically by the packager on drupal.org.
+# Reference: https://www.drupal.org/node/2000204
+#
