@@ -1,0 +1,6 @@
+{
+  "name": "drupal/jmws-jmws_hello_world_d8",
+  "description": "A minimal composer.json file for the jmws_hello_world_d8 module.  (See https://www.drupal.org/node/2514612 .)",
+  "type": "drupal-module",
+  "license": "GPL-2.0+"
+}
