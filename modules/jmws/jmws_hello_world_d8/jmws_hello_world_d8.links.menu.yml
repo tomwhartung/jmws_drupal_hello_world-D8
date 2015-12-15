@@ -1,0 +1,6 @@
+jmws_hello_world_d8.admin:
+  title: 'jmws_hello_world_d8 module settings'
+  description: 'Using the example online at https://www.drupal.org/node/2464213 to make an admin settings page link for the jmws_hello_world_d8 module.'
+  parent: system.admin_config_development
+  route_name: jmws_hello_world_d8.content
+  weight: 100
