@@ -49,6 +49,10 @@ class HugsController extends ControllerBase {
     return $this->t('Not published');
   }
 
+  /**
+   *  To run this method, use an url such as this:
+   *    http://jane.tomhartung.com/hug/jane/tom/2
+   */
   public function hug($to, $from, $count) {
     $this->hugTracker->addHug($to);
     if (!$count) {
