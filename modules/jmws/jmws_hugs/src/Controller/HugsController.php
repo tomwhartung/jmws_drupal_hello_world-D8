@@ -82,6 +82,10 @@ class HugsController extends ControllerBase {
     ];
   }
 
+  /**
+   *  Original version, from about 18:00 in the video
+   *  Returns render array with markup (simplest version)
+   */
   public function hug1($to, $from) {
     $message = $this->t('%from sends hugs to %to', [
       '%from' => $from,
