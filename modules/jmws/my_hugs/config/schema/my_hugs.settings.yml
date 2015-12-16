@@ -1,7 +1,7 @@
-hugs.settings:
+my_hugs.settings:
   type: mapping
-  label: 'Hug module settings'
+  label: 'My-Hug Module Settings'
   mapping:
     default_count:
       type: integer
-      label: 'Default hug count'
+      label: 'Default my_hug count'
