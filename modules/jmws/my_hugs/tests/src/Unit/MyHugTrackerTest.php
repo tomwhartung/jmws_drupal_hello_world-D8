@@ -1,36 +1,36 @@
 <?php
 /**
- * @contains Drupal\Test\hugs\Unit\HugTrackerTest.
+ * @contains Drupal\Test\my_hugs\Unit\MyHugTrackerTest.
  */
 
-namespace Drupal\Tests\hugs\Unit;
+namespace Drupal\Tests\my_hugs\Unit;
 
-use Drupal\hugs\HugTracker;
+use Drupal\my_hugs\MyHugTracker;
 use Drupal\Tests\UnitTestCase;
 use Drupal\Core\State\StateInterface;
 
 /**
- * Tests the Hug Tracker service.
+ * Tests the MyHug Tracker service.
  *
- * @group Hug
+ * @group MyHug
  */
-class HugTrackerTest extends UnitTestCase {
+class MyHugTrackerTest extends UnitTestCase {
 
-  public function testAddHug() {
+  public function testAddMyHug() {
     // Note: The ::class syntax is PHP 5.5. You can also specify the full class
     // name as a string literal.
     $state = $this->prophesize(StateInterface::class);
-    $state->set('hugs.last_recipient', 'Dries')->shouldBeCalled();
+    $state->set('my_hugs.last_recipient', 'Dries')->shouldBeCalled();
 
-    $tracker = new HugTracker($state->reveal());
-    $tracker->addHug('Dries');
+    $tracker = new MyHugTracker($state->reveal());
+    $tracker->addMyHug('Dries');
   }
 
   public function testGetLastRecipient() {
     $state = $this->prophesize(StateInterface::class);
-    $state->get('hugs.last_recipient')->willReturn('Dries');
+    $state->get('my_hugs.last_recipient')->willReturn('Dries');
 
-    $tracker = new HugTracker($state->reveal());
+    $tracker = new MyHugTracker($state->reveal());
     $this->assertEquals('Dries', $tracker->getLastRecipient());
   }
 
