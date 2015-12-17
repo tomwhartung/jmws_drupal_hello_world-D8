@@ -1,22 +1,22 @@
-hugs.hug:
-  path: /hug/{from}/{to}/{count}
+my_hugs.my_hug:
+  path: /my_hug/{from}/{to}/{count}
   defaults:
-    _controller: 'Drupal\hugs\Controller\HugsController::hug'
-    _title: 'Hug!'
+    _controller: 'Drupal\my_hugs\Controller\MyHugsController::myHug'
+    _title: 'MyHug (this is _title in my_hugs.routing.yml)!'
     count: 0
   requirements:
     _permission: 'access content'
     count: \d+
-hugs.config:
-  path: /admin/config/system/hugs
+my_hugs.config:
+  path: /admin/config/system/my_hugs
   defaults:
-    _form: 'Drupal\hugs\Form\ConfigForm'
-    _title: 'Hug configuration'
+    _form: 'Drupal\my_hugs\Form\ConfigForm'
+    _title: 'MyHug configuration'
   requirements:
-    _permission: 'configure_hugs'
-hugs.node:
-  path: /node/{node}/hug
+    _permission: 'configure_my_hugs'
+my_hugs.node:
+  path: /node/{node}/my_hug
   defaults:
-    _controller: 'Drupal\hugs\Controller\HugsController::nodeHug'
+    _controller: 'Drupal\my_hugs\Controller\MyHugsController::nodeMyHug'
   requirements:
     _permission: 'access content'

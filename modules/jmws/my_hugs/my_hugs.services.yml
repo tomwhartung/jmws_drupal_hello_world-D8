@@ -1,4 +1,4 @@
 services:
-  hugs.hug_tracker:
-    class: Drupal\hugs\HugTracker
+  my_hugs.my_hug_tracker:
+    class: Drupal\my_hugs\MyHugTracker
     arguments: ['@state']

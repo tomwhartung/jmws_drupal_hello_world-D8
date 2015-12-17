@@ -1,5 +1,5 @@
-hugs.config:
-  title: 'Hugs configuration'
-  description: 'Configure the hugs system'
-  route_name: hugs.config
+my_hugs.config:
+  title: 'My Hugs configuration'
+  description: 'Configure the my_hugs module (system?)'
+  route_name: my_hugs.config
   parent: system.admin_config_system
