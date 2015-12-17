@@ -1,28 +1,28 @@
 <?php
 
-namespace Drupal\hugs\Controller;
+namespace Drupal\my_hugs\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\hugs\HugTracker;
+use Drupal\my_hugs\MyHugTracker;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\node\NodeInterface;
 
-class HugsController extends ControllerBase {
+class MyHugsController extends ControllerBase {
 
   /**
-   * @var \Drupal\hugs\HugTracker
+   * @var \Drupal\my_hugs\MyHugTracker
    */
-  protected $hugTracker;
+  protected $myHugTracker;
 
-  public function __construct(HugTracker $tracker) {
-    $this->hugTracker = $tracker;
+  public function __construct(MyHugTracker $tracker) {
+    $this->myHugTracker = $tracker;
   }
 
   public static function create(ContainerInterface $container) {
-    return new static($container->get('hugs.hug_tracker'));
+    return new static($container->get('my_hugs.my_hug_tracker'));
   }
 
-  public function nodeHug(NodeInterface $node) {
+  public function nodeMyHug(NodeInterface $node) {
     if ($node->isPublished()) {
       // These are the same!
       $body = $node->body->value;
@@ -36,7 +36,7 @@ class HugsController extends ControllerBase {
         $terms[] = $tag->entity->label();
       }
 
-      $message = $this->t('Everyone hug @name because @reasons!', [
+      $message = $this->t('Everyone give @name a my_hug because @reasons!', [
         '@name' => $node->getOwner()->label(),
         '@reasons' => implode(', ', $terms),
       ]);
@@ -51,36 +51,36 @@ class HugsController extends ControllerBase {
 
   /**
    *  To run this method, use an url such as this:
-   *    http://jane.tomhartung.com/hug/jane/tom/2
+   *    http://jane.tomhartung.com/my_hug/jane/tom/2
    */
-  public function hug($to, $from, $count) {
-    $this->hugTracker->addHug($to);
+  public function myHug($to, $from, $count) {
+    $this->myHugTracker->addMyHug($to);
     if (!$count) {
-      $count = $this->config('hugs.settings')->get('default_count');
+      $count = $this->config('my_hugs.settings')->get('default_count');
     }
     return [
-      '#theme' => 'hug_page',
+      '#theme' => 'my_hug_page',
       '#from' => $from,
       '#to' => $to,
       '#count' => $count
     ];
   }
 
-  public function hug3($to, $from, $count) {
+  public function myHug3($to, $from, $count) {
     if (!$count) {
-      $count = $this->config('hugs.settings')->get('default_count');
+      $count = $this->config('my_hugs.settings')->get('default_count');
     }
     return [
-      '#theme' => 'hug_page',
+      '#theme' => 'my_hug_page',
       '#from' => $from,
       '#to' => $to,
       '#count' => $count
     ];
   }
 
-  public function hug2($to, $from) {
+  public function myHug2($to, $from) {
     return [
-      '#theme' => 'hug_page',
+      '#theme' => 'my_hug_page',
       '#from' => $from,
       '#to' => $to,
     ];
@@ -90,8 +90,8 @@ class HugsController extends ControllerBase {
    *  Original version, from about 18:00 in the video
    *  Returns render array with markup (simplest version)
    */
-  public function hug1($to, $from) {
-    $message = $this->t('%from sends hugs to %to', [
+  public function myHug1($to, $from) {
+    $message = $this->t('%from sends my_hugs to %to', [
       '%from' => $from,
       '%to' => $to,
     ]);
