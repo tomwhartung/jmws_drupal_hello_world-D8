@@ -1,10 +1,10 @@
 <?php
 
-namespace Drupal\hugs;
+namespace Drupal\my_hugs;
 
 use Drupal\Core\State\StateInterface;
 
-class HugTracker {
+class MyHugTracker {
 
   /**
    * @var \Drupal\Core\State\StateInterface
@@ -15,12 +15,12 @@ class HugTracker {
     $this->state = $state;
   }
 
-  public function addHug($target_name) {
-    $this->state->set('hugs.last_recipient', $target_name);
+  public function addMyHug($target_name) {
+    $this->state->set('my_hugs.last_recipient', $target_name);
     return $this;
   }
 
   public function getLastRecipient() {
-    return $this->state->get('hugs.last_recipient');
+    return $this->state->get('my_hugs.last_recipient');
   }
 }
