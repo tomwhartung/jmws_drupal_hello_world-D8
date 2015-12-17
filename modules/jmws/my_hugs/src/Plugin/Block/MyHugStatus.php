@@ -1,39 +1,39 @@
 <?php
 
-namespace Drupal\hugs\Plugin\Block;
+namespace Drupal\my_hugs\Plugin\Block;
 
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
-use Drupal\hugs\HugTracker;
+use Drupal\my_hugs\MyHugTracker;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Reports on hugability status.
+ * Reports on myHugability status.
  *
  * @Block(
- *   id = "hugs_status",
- *   admin_label = @Translation("Hug status"),
+ *   id = "my_hugs_status",
+ *   admin_label = @Translation("MyHug status"),
  *   category = @Translation("System")
  * )
  */
-class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
+class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
-   * @var \Drupal\hugs\HugTracker
+   * @var \Drupal\my_hugs\MyHugTracker
    */
-  protected $hugTracker;
+  protected $myHugTracker;
 
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, HugTracker $hugTracker) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, MyHugTracker $myHugTracker) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
-    $this->hugTracker = $hugTracker;
+    $this->myHugTracker = $myHugTracker;
   }
 
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     return new static(
       $configuration, $plugin_id, $plugin_definition,
-      $container->get('hugs.hug_tracker')
+      $container->get('my_hugs.my_hug_tracker')
     );
   }
 
@@ -44,7 +44,7 @@ class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
   public function blockForm($form, FormStateInterface $form_state) {
     $form['enabled'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Hugging enabled'),
+      '#title' => $this->t('MyHugging enabled'),
       '#default_value' => $this->configuration['enabled'],
     ];
 
@@ -57,12 +57,12 @@ class HugStatus extends BlockBase implements ContainerFactoryPluginInterface {
 
   public function build() {
     if ($this->configuration['enabled']) {
-      $message = $this->t('@to was the last person hugged', [
-        '@to' => $this->hugTracker->getLastRecipient()
+      $message = $this->t('@to was the last person my_hugged', [
+        '@to' => $this->myHugTracker->getLastRecipient()
       ]);
     }
     else {
-      $message = $this->t('No hugs :-(');
+      $message = $this->t('Srsly wtf, no my_hugs :-(');
     }
     return [
       '#markup' => $message,
