@@ -1,23 +1,23 @@
 <?php
 /**
- * @contains Drupal\Test\hugs\Functional\HugPageTest.
+ * @contains Drupal\Test\my_hugs\Functional\MyHugPageTest.
  */
 
-namespace Drupal\Tests\hugs\Functional;
+namespace Drupal\Tests\my_hugs\Functional;
 
 use Drupal\simpletest\BrowserTestBase;
 
 /**
- * Tests the Hug page.
+ * Tests the MyHug page.
  *
- * @group Hug
+ * @group MyHug
  *
  * // These two tags are apparently required to make BrowserTests run correctly.
  *
  * @runTestsInSeparateProcesses
  * @preserveGlobalState disabled
  */
-class HugPageTest extends BrowserTestBase {
+class MyHugPageTest extends BrowserTestBase {
 
   /**
    * Modules to enable.
@@ -26,14 +26,14 @@ class HugPageTest extends BrowserTestBase {
    *
    * @var array
    */
-  public static $modules = ['node', 'hugs'];
+  public static $modules = ['node', 'my_hugs'];
 
   /**
    * Tests the main hug page with default count.
    *
    * @dataProvider hugAttemptProvider
    */
-  public function testHugPage($from = NULL, $to = NULL, $count = NULL, $expectedStatus = 200, $expectedString = '') {
+  public function testMyHugPage($from = NULL, $to = NULL, $count = NULL, $expectedStatus = 200, $expectedString = '') {
     $account = $this->drupalCreateUser(['access content']);
     $this->drupalLogin($account);
 
@@ -57,7 +57,7 @@ class HugPageTest extends BrowserTestBase {
   }
 
   /**
-   * @see testHugPage
+   * @see testMyHugPage
    *
    * Note: dataProvider methods in PHPUnit are super-duper-useful and can
    * greatly reduce test maintenance.  However, in BrowserTestBase each provider
@@ -67,9 +67,9 @@ class HugPageTest extends BrowserTestBase {
    */
   public function hugAttemptProvider() {
     return [
-      ['Larry', 'Dries', NULL, 200, 'Larry hugs Dries 3 times'],
-      ['Larry', 'Dries', 2, 200, 'Larry hugs Dries 2 times'],
-      ['Larry', 'Dries', 1, 200, 'Larry hugs Dries 1 time'],
+      ['Larry', 'Dries', NULL, 200, 'Larry my_hugs Dries 3 times'],
+      ['Larry', 'Dries', 2, 200, 'Larry my_hugs Dries 2 times'],
+      ['Larry', 'Dries', 1, 200, 'Larry my_hugs Dries 1 time'],
       ['Larry', NULL, NULL, 404],
       [NULL, NULL, NULL, 404],
       ['Larry', 'Dries', 'many', 404],
@@ -80,10 +80,10 @@ class HugPageTest extends BrowserTestBase {
    * Verify that a user with the right permission can access the config form.
    */
   public function testAdminFormAccess() {
-    $account = $this->drupalCreateUser(['configure_hugs']);
+    $account = $this->drupalCreateUser(['configure_my_hugs']);
     $this->drupalLogin($account);
 
-    $this->drupalGet('/admin/config/system/hugs');
+    $this->drupalGet('/admin/config/system/my_hugs');
     $this->assertSession()->statusCodeEquals(200);
 
     // This is the fancier way of checking and manipulating the result.
@@ -104,7 +104,7 @@ class HugPageTest extends BrowserTestBase {
     // Sadly we have to hit the container directly in order to verify that
     // the data was saved to configuration. Ah well.
     $config_factory = $this->container->get('config.factory');
-    $value = $config_factory->get('hugs.settings')->get('default_count');
+    $value = $config_factory->get('my_hugs.settings')->get('default_count');
     $this->assertSame(5, $value);
   }
 
@@ -116,7 +116,7 @@ class HugPageTest extends BrowserTestBase {
     $this->drupalLogin($account);
 
     // Without the right permission, this should 403.
-    $this->drupalGet('/admin/config/system/hugs');
+    $this->drupalGet('/admin/config/system/my_hugs');
     $this->assertSession()->statusCodeEquals(403);
   }
 
