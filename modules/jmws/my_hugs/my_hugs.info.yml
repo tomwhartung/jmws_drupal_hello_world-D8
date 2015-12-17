@@ -1,4 +1,4 @@
-name: Hugs
-description: Examples of hugs
+name: MyHugs
+description: Experimental module based on hugs from the Drupal 8 Crash Course video on youtube.
 type: module
 core: 8.x
