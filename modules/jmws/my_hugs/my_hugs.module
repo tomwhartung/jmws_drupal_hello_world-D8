@@ -3,10 +3,10 @@
 /**
  * Implements hook_theme().
  */
-function hugs_theme() {
-  $theme['hug_page'] = [
+function my_hugs_theme() {
+  $theme['my_hug_page'] = [
     'variables' => ['from' => NULL, 'to' => NULL, 'count' => NULL],
-    'template' => 'hug_page',
+    'template' => 'my_hug_page',
   ];
 
   return $theme;
