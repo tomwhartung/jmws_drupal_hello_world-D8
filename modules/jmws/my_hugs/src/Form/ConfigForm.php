@@ -55,13 +55,30 @@ class ConfigForm extends ConfigFormBase {
       '#default_value' => 'Here is a default value for the experimental textarea',
     ];
 
-   $radio_choices = array(
+   $supported_gadget_detectors = array(
       'detect_mobile_browsers',   // note that this is used as the default throughout
       'mobile_detect',
       'tera_wurfl',
       'no_detection'      // defaults to desktop (allows for isolating responsive behavior)
    );
+   //
+   // Add a section to the module's Settings screen that contains
+   // radio buttons allowing the admin to set the device detector.
+   // This shows up under Configuration -> IdMyGadget -> Gadget Detector
+   //
+   $form['idmg_gadget_detector'] = array(
+      '#type' => 'radios',
+      '#title' => t('Gadget Detector (ConfigForm)'),
+      '#default_value' => $supported_gadget_detectors[0],
+      '#options' => $supported_gadget_detectors,
+      '#description' => $this->t('Select the 3rd party device detector to use for this site.'),
+      '#required' => TRUE,
+   );
 
+   $radio_choices = array(
+      'No',   // note that this is used as the default throughout
+      'Yes',
+   );
    $form['idmg_phone_nav_on_phones'] = array(
       '#type' => 'radios',
       '#title' => t( 'Show Header/Footer Nav on phones?' ),
