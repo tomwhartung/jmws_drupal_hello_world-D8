@@ -43,6 +43,18 @@ class ConfigForm extends ConfigFormBase {
       '#default_value' => 'default radio value',
     ];
 
+    $form['exp_input'] = [
+      '#type' => 'input',
+      '#title' => $this->t('Experimental input defined in ConfigForm class'),
+      '#default_value' => 'default input value',
+    ];
+
+    $form['exp_textarea'] = [
+      '#type' => 'textarea',
+      '#title' => $this->t('Experimental textarea input defined in ConfigForm class'),
+      '#default_value' => 'Here is a default value for the experimental textarea',
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
