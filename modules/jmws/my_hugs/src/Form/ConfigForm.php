@@ -55,6 +55,22 @@ class ConfigForm extends ConfigFormBase {
       '#default_value' => 'Here is a default value for the experimental textarea',
     ];
 
+   $radio_choices = array(
+      'detect_mobile_browsers',   // note that this is used as the default throughout
+      'mobile_detect',
+      'tera_wurfl',
+      'no_detection'      // defaults to desktop (allows for isolating responsive behavior)
+   );
+
+   $form['idmg_phone_nav_on_phones'] = array(
+      '#type' => 'radios',
+      '#title' => t( 'Show Header/Footer Nav on phones?' ),
+      '#default_value' => $radio_choices[1],
+      '#options' => $radio_choices,
+      '#description' => $this->t( 'Select whether the jQuery Header and Footer Nav Menu should appear on phones.' ),
+      '#required' => FALSE,
+   );
+
     return parent::buildForm($form, $form_state);
   }
 
