@@ -101,6 +101,118 @@ class ConfigForm extends ConfigFormBase {
     return parent::buildForm($form, $form_state);
   }
 
+  /**
+ * Admin config function to allow customization of the site heading on phones
+ */
+function idMyGadget_admin_heading( $gadget_type )
+{
+   global $jmwsIdMyGadget;
+   checkJmwsIdMyGadgetObject();
+
+   $radio_choices = $jmwsIdMyGadget->translatedRadioChoices;
+   $default_radio_choice = $radio_choices[0];
+   $valid_elements = JmwsIdMyGadgetDrupal::$validElements;
+   $default_valid_element = $valid_elements[0];
+
+   $gadget_type_plural = $gadget_type . 's';
+   $gadget_type_ucfirst = ucfirst( $gadget_type );
+   $gadget_type_plural_ucfirst = ucfirst( $gadget_type_plural );
+   $form = array();
+
+   $setting_name = 'idmg_logo_file_' . $gadget_type;     // e.g., 'idmg_logo_file_phone'
+   $form[$setting_name] = array(
+      '#type' => 'textfield',
+      '#title' => t( 'Logo for ' . $gadget_type_plural_ucfirst ),
+      '#default_value' => variable_get( $setting_name, '' ),
+      '#size' => 100,
+      '#maxlength' => 200,
+      '#description' => t( 'The logo image to display on ' . $gadget_type_plural . '.' ),
+      '#required' => FALSE,
+   );
+   //
+   // FIXME: This logo file field doesn't seem to work, but it's a step in the right direction
+   //
+   $setting_name = 'idmg_logo_file_upload_' . $gadget_type;   // e.g., 'idmg_logo_file_upload_phone'
+   $form[$setting_name] = array(
+      '#type' => 'file',
+   // '#title' => t( 'Upload logo image for ' . $gadget_type_plural_ucfirst . '?' ),
+      '#title' => t( 'WTF is wrong with this title thingie?' ),
+      '#default_value' => variable_get( $setting_name, '' ),
+      '#description' => t( 'Upload an image to display in the heading of this site on ' . $gadget_type_plural . '.' ),
+   // '#title_display' => 'invisible',
+   // '#title_display' => 'before',
+      '#title_display' => 'after',
+      '#size' => 22,
+      '#theme_wrappers' => array(),
+      '#required' => FALSE,
+   );
+
+   $setting_name = 'idmg_show_site_name_' . $gadget_type;   // e.g., 'idmg_show_site_name_phone'
+   $form[$setting_name] = array(
+      '#type' => 'radios',
+      '#title' => t( 'Show Site Name on ' . $gadget_type_plural_ucfirst . '?' ),
+      '#default_value' => variable_get( $setting_name, $default_radio_choice ),
+      '#options' => $radio_choices,
+      '#description' => t( 'Select whether you want the name of this site to display in the header on ' . $gadget_type_plural . '.' ),
+      '#required' => TRUE,
+   );
+
+   $setting_name = 'idmg_site_name_element_' . $gadget_type;     // e.g., 'idmg_site_name_element_phone'
+   $form[$setting_name] = array(
+      '#type' => 'select',
+      '#title' => t( 'Site Name Element ' . $gadget_type_ucfirst ),
+      '#default_value' => variable_get( $setting_name, $default_valid_element ),
+      '#options' => $valid_elements,
+      '#description' => t( 'Select the html element in which you want to display the name of this site in the header on ' . $gadget_type_plural . '.' ),
+      '#required' => FALSE,
+   );
+
+   $setting_name = 'idmg_site_title_' . $gadget_type;     // e.g., 'idmg_site_title_phone'
+   $form[$setting_name] = array(
+      '#type' => 'textfield',
+      '#title' => t( 'Site Title on ' . $gadget_type_plural_ucfirst ),
+      '#default_value' => variable_get( $setting_name, '' ),
+      '#size' => 60,
+      '#maxlength' => 100,
+      '#description' => t( 'The site title to display on ' . $gadget_type_plural . '.' ),
+      '#required' => FALSE,
+   );
+
+   $setting_name = 'idmg_site_title_element_' . $gadget_type;     // e.g., 'idmg_site_title_element_phone'
+   $form[$setting_name] = array(
+      '#type' => 'select',
+      '#title' => t( 'Site Title Element ' . $gadget_type_ucfirst ),
+      '#default_value' => variable_get( $setting_name, $default_valid_element ),
+      '#options' => $valid_elements,
+      '#description' => t( 'Select the html element in which you want to display the site title in the header on ' . $gadget_type_plural . '.' ),
+      '#required' => FALSE,
+   );
+
+   $setting_name = 'idmg_site_description_' . $gadget_type;     // e.g., 'idmg_site_description_phone'
+   $form[$setting_name] = array(
+      '#type' => 'textfield',
+      '#title' => t( 'Site Slogan on ' . $gadget_type_plural_ucfirst ),
+      '#default_value' => variable_get( $setting_name, '' ),
+      '#size' => 60,
+      '#maxlength' => 100,
+      '#description' => t('The site slogan to display on ' . $gadget_type_plural . '.'),
+      '#required' => FALSE,
+   );
+
+   $setting_name = 'idmg_site_description_element_' . $gadget_type;     // e.g., 'idmg_site_description_element_phone'
+   $form[$setting_name] = array(
+      '#type' => 'select',
+      '#title' => t( 'Site Slogan Element ' . $gadget_type_ucfirst ),
+      '#default_value' => variable_get( $setting_name, $default_valid_element ),
+      '#options' => $valid_elements,
+      '#description' => t( 'Select the html element in which you want to display the site slogan in the header on ' . $gadget_type_plural . '.' ),
+      '#required' => FALSE,
+   );
+
+// return system_settings_form( $form );
+   return $form;   // NOTE: calling fcn runs system_settings_form !!!
+}
+
   public function submitForm(array &$form, FormStateInterface $form_state) {
     parent::submitForm($form, $form_state);
 
