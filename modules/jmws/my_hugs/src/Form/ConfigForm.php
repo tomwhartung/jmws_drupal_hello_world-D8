@@ -10,6 +10,12 @@ class ConfigForm extends ConfigFormBase {
     return 'my_hug_config';
   }
 
+  /**
+   * This form is entirely experimental, being used to see what works and what doesn't
+   * @param array $form
+   * @param FormStateInterface $form_state
+   * @return type
+   */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('my_hugs.settings');
 
@@ -25,10 +31,10 @@ class ConfigForm extends ConfigFormBase {
       '#default_value' => 'default string value',
     ];
 
-    $form['exp_text'] = [
-      '#type' => 'text',
-      '#title' => $this->t('Experimental text input defined in ConfigForm class'),
-      '#default_value' => 'default value for experimental text',
+    $form['exp_textfield'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Experimental textfield input defined in ConfigForm class'),
+      '#default_value' => 'default value for experimental textfield',
     ];
 
     $form['exp_number'] = [
@@ -88,6 +94,10 @@ class ConfigForm extends ConfigFormBase {
       '#required' => FALSE,
    );
 
+   $validElements = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span' );
+
+   $jqueryMobileThemeChoices = array( 'a', 'b', 'c', 'd', 'e', 'f' );
+   
     return parent::buildForm($form, $form_state);
   }
 
