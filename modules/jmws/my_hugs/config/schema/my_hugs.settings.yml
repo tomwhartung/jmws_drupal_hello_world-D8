@@ -4,4 +4,7 @@ my_hugs.settings:
   mapping:
     default_count:
       type: integer
-      label: 'Default my_hug count'
+      label: 'Defaultttt my_hug count'
+    exp_string:
+      type: string
+      label: 'Experimental string defined in config/schema/...'
