@@ -25,6 +25,12 @@ class ConfigForm extends ConfigFormBase {
       '#default_value' => 'default string value',
     ];
 
+    $form['exp_text'] = [
+      '#type' => 'text',
+      '#title' => $this->t('Experimental text input defined in ConfigForm class'),
+      '#default_value' => 'default value for experimental text',
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
