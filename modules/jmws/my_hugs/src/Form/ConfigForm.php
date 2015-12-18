@@ -15,8 +15,14 @@ class ConfigForm extends ConfigFormBase {
 
     $form['default_count'] = [
       '#type' => 'number',
-      '#title' => $this->t('Default my_hug count'),
+      '#title' => $this->t('Default my_hug counttttt'),
       '#default_value' => $config->get('default_count'),
+    ];
+
+    $form['exp_string'] = [
+      '#type' => 'string',
+      '#title' => $this->t('Experimental string defined in ConfigForm class'),
+      '#default_value' => 'default string value',
     ];
 
     return parent::buildForm($form, $form_state);
