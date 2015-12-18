@@ -8,3 +8,6 @@ my_hugs.settings:
     exp_string:
       type: string
       label: 'Experimental string defined in config/schema/...'
+    exp_text:
+      type: text
+      label: 'Experimental text input field defined in config/schema/...'
