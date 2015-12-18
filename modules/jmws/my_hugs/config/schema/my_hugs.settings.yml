@@ -11,6 +11,9 @@ my_hugs.settings:
     exp_text:
       type: text
       label: 'Experimental text input field defined in config/schema/...'
+    idmg_gadget_detector:
+      type: integer
+      label: 'Gadget Detector label in config/schema/my_hugs.settings.yml'
     idmg_phone_nav_on_phones:
       type: radios
       label: 'Select whether the jQuery Header and yadda yadda...'
