@@ -31,37 +31,37 @@ class ConfigForm extends ConfigFormBase {
     $form['exp_string'] = [
       '#type' => 'string',
       '#title' => $this->t('Experimental string defined in ConfigForm class'),
-      '#default_value' => 'default string value',
+	  '#default_value' => $config->get('default_count'),
     ];
 
     $form['exp_textfield'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Experimental textfield input defined in ConfigForm class'),
-      '#default_value' => 'default value for experimental textfield',
+      '#default_value' => $config->get('exp_textfield'),
     ];
 
     $form['exp_number'] = [
       '#type' => 'number',
       '#title' => $this->t('Experimental number input field defined in ConfigForm class'),
-      '#default_value' => '0',
+      '#default_value' => $config->get('exp_number'),
     ];
 
     $form['exp_radio'] = [
       '#type' => 'radio',
       '#title' => $this->t('Experimental radio defined in ConfigForm class'),
-      '#default_value' => 'default radio value',
+      '#default_value' => $config->get('exp_radio'),
     ];
 
     $form['exp_input'] = [
       '#type' => 'input',
       '#title' => $this->t('Experimental input defined in ConfigForm class'),
-      '#default_value' => 'default input value',
+      '#default_value' => $config->get('exp_input'),
     ];
 
     $form['exp_textarea'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Experimental textarea input defined in ConfigForm class'),
-      '#default_value' => 'Here is a default value for the experimental textarea',
+      '#default_value' => $config->get('exp_textarea'),
     ];
 
    $supported_gadget_detectors = array(
@@ -78,7 +78,8 @@ class ConfigForm extends ConfigFormBase {
    $form['idmg_gadget_detector'] = array(
       '#type' => 'radios',
       '#title' => t('Gadget Detector (ConfigForm)'),
-      '#default_value' => $supported_gadget_detectors[0],
+      // '#default_value' => $supported_gadget_detectors[0],
+	  '#default_value' => $config->get('idmg_gadget_detector'),
       '#options' => $supported_gadget_detectors,
       '#description' => $this->t('Select the 3rd party device detector to use for this site.'),
       '#required' => TRUE,
@@ -91,7 +92,8 @@ class ConfigForm extends ConfigFormBase {
    $form['idmg_phone_nav_on_phones'] = array(
       '#type' => 'radios',
       '#title' => t( 'Show Header/Footer Nav on phones?' ),
-      '#default_value' => $radio_choices[1],
+      // '#default_value' => $radio_choices[1],
+	  '#default_value' => $config->get('idmg_phone_nav_on_phones'),
       '#options' => $radio_choices,
       '#description' => $this->t( 'Select whether the jQuery Header and Footer Nav Menu should appear on phones.' ),
       '#required' => FALSE,
