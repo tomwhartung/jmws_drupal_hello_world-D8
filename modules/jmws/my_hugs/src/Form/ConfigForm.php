@@ -17,6 +17,9 @@ class ConfigForm extends ConfigFormBase {
    * @return type
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+
+    $form = $this->idMyGadget_admin_heading_phones();
+
     $config = $this->config('my_hugs.settings');
 
     $form['default_count'] = [
@@ -94,25 +97,36 @@ class ConfigForm extends ConfigFormBase {
       '#required' => FALSE,
    );
 
-   $validElements = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span' );
-
    $jqueryMobileThemeChoices = array( 'a', 'b', 'c', 'd', 'e', 'f' );
    
     return parent::buildForm($form, $form_state);
   }
-
-  /**
+/**
  * Admin config function to allow customization of the site heading on phones
  */
-function idMyGadget_admin_heading( $gadget_type )
+public function idMyGadget_admin_heading_phones()
+{
+   $form = $this->idMyGadget_admin_heading( 'phone' );
+   return $form;
+}
+
+/**
+ * Admin config function to allow customization of the site heading on phones
+ */
+public function idMyGadget_admin_heading( $gadget_type )
 {
    global $jmwsIdMyGadget;
-   checkJmwsIdMyGadgetObject();
+   // checkJmwsIdMyGadgetObject();
 
-   $radio_choices = $jmwsIdMyGadget->translatedRadioChoices;
+   // $radio_choices = $jmwsIdMyGadget->translatedRadioChoices;
+   $radio_choices = array(
+      'No',   // note that this is used as the default throughout
+      'Yes',
+   );
    $default_radio_choice = $radio_choices[0];
-   $valid_elements = JmwsIdMyGadgetDrupal::$validElements;
-   $default_valid_element = $valid_elements[0];
+   // $validElements = JmwsIdMyGadgetDrupal::$validElements;
+   $validElements = array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'div', 'span' );
+   $default_valid_element = $validElements[0];
 
    $gadget_type_plural = $gadget_type . 's';
    $gadget_type_ucfirst = ucfirst( $gadget_type );
@@ -123,7 +137,7 @@ function idMyGadget_admin_heading( $gadget_type )
    $form[$setting_name] = array(
       '#type' => 'textfield',
       '#title' => t( 'Logo for ' . $gadget_type_plural_ucfirst ),
-      '#default_value' => variable_get( $setting_name, '' ),
+      // '#default_value' => variable_get( $setting_name, '' ),
       '#size' => 100,
       '#maxlength' => 200,
       '#description' => t( 'The logo image to display on ' . $gadget_type_plural . '.' ),
@@ -137,7 +151,7 @@ function idMyGadget_admin_heading( $gadget_type )
       '#type' => 'file',
    // '#title' => t( 'Upload logo image for ' . $gadget_type_plural_ucfirst . '?' ),
       '#title' => t( 'WTF is wrong with this title thingie?' ),
-      '#default_value' => variable_get( $setting_name, '' ),
+      // '#default_value' => variable_get( $setting_name, '' ),
       '#description' => t( 'Upload an image to display in the heading of this site on ' . $gadget_type_plural . '.' ),
    // '#title_display' => 'invisible',
    // '#title_display' => 'before',
@@ -151,7 +165,7 @@ function idMyGadget_admin_heading( $gadget_type )
    $form[$setting_name] = array(
       '#type' => 'radios',
       '#title' => t( 'Show Site Name on ' . $gadget_type_plural_ucfirst . '?' ),
-      '#default_value' => variable_get( $setting_name, $default_radio_choice ),
+      // '#default_value' => variable_get( $setting_name, $default_radio_choice ),
       '#options' => $radio_choices,
       '#description' => t( 'Select whether you want the name of this site to display in the header on ' . $gadget_type_plural . '.' ),
       '#required' => TRUE,
@@ -161,8 +175,8 @@ function idMyGadget_admin_heading( $gadget_type )
    $form[$setting_name] = array(
       '#type' => 'select',
       '#title' => t( 'Site Name Element ' . $gadget_type_ucfirst ),
-      '#default_value' => variable_get( $setting_name, $default_valid_element ),
-      '#options' => $valid_elements,
+      // '#default_value' => variable_get( $setting_name, $default_valid_element ),
+      '#options' => $validElements,
       '#description' => t( 'Select the html element in which you want to display the name of this site in the header on ' . $gadget_type_plural . '.' ),
       '#required' => FALSE,
    );
@@ -171,7 +185,7 @@ function idMyGadget_admin_heading( $gadget_type )
    $form[$setting_name] = array(
       '#type' => 'textfield',
       '#title' => t( 'Site Title on ' . $gadget_type_plural_ucfirst ),
-      '#default_value' => variable_get( $setting_name, '' ),
+      // '#default_value' => variable_get( $setting_name, '' ),
       '#size' => 60,
       '#maxlength' => 100,
       '#description' => t( 'The site title to display on ' . $gadget_type_plural . '.' ),
@@ -182,8 +196,8 @@ function idMyGadget_admin_heading( $gadget_type )
    $form[$setting_name] = array(
       '#type' => 'select',
       '#title' => t( 'Site Title Element ' . $gadget_type_ucfirst ),
-      '#default_value' => variable_get( $setting_name, $default_valid_element ),
-      '#options' => $valid_elements,
+      // '#default_value' => variable_get( $setting_name, $default_valid_element ),
+      '#options' => $validElements,
       '#description' => t( 'Select the html element in which you want to display the site title in the header on ' . $gadget_type_plural . '.' ),
       '#required' => FALSE,
    );
@@ -192,7 +206,7 @@ function idMyGadget_admin_heading( $gadget_type )
    $form[$setting_name] = array(
       '#type' => 'textfield',
       '#title' => t( 'Site Slogan on ' . $gadget_type_plural_ucfirst ),
-      '#default_value' => variable_get( $setting_name, '' ),
+      // '#default_value' => variable_get( $setting_name, '' ),
       '#size' => 60,
       '#maxlength' => 100,
       '#description' => t('The site slogan to display on ' . $gadget_type_plural . '.'),
@@ -203,8 +217,8 @@ function idMyGadget_admin_heading( $gadget_type )
    $form[$setting_name] = array(
       '#type' => 'select',
       '#title' => t( 'Site Slogan Element ' . $gadget_type_ucfirst ),
-      '#default_value' => variable_get( $setting_name, $default_valid_element ),
-      '#options' => $valid_elements,
+      // '#default_value' => variable_get( $setting_name, $default_valid_element ),
+      '#options' => $validElements,
       '#description' => t( 'Select the html element in which you want to display the site slogan in the header on ' . $gadget_type_plural . '.' ),
       '#required' => FALSE,
    );
