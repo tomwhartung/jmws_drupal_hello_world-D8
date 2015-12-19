@@ -232,7 +232,15 @@ public function idMyGadget_admin_heading( $gadget_type )
 
     $config = $this->config('my_hugs.settings');
     $config->set('default_count', $form_state->getValue('default_count'));
-    $config->save();
+    $config->set('exp_textfield', $form_state->getValue('exp_textfield'));
+    $config->set('exp_number', $form_state->getValue('exp_number'));
+    $config->set('exp_radio', $form_state->getValue('exp_radio'));
+    $config->set('exp_textarea', $form_state->getValue('exp_textarea'));
+    $config->set('idmg_gadget_detector', $form_state->getValue('idmg_gadget_detector'));
+    $config->set('idmg_phone_nav_on_phones', $form_state->getValue('idmg_phone_nav_on_phones'));
+    // $config->set('xyz', $form_state->getValue('xyz'));
+
+	$config->save();
   }
 
   public function getEditableConfigNames() {
