@@ -22,13 +22,18 @@ class MyHugsController extends ControllerBase {
     return new static($container->get('my_hugs.my_hug_tracker'));
   }
 
+  /**
+   * Discussed at 47:00 in https://www.youtube.com/watch?v=8vwC_01KFLo
+   * @param NodeInterface $node
+   * @return type
+   */
   public function nodeMyHug(NodeInterface $node) {
     if ($node->isPublished()) {
-      // These are the same!
-      $body = $node->body->value;
-      $body = $node->body[0]->value;
+      // These are the same!  BUT DO NOT USE! (See below)
+      $body = $node->body->value;      // works even when body is multi-valued (gets the first one)
+      $body = $node->body[0]->value;   // works even when body is single-valued (gets the only one)
 
-      // But we really want...
+      // But we really want the processed value, which has been run through drupal's filters
       $formatted = $node->body->processed;
 
       $terms = [];
