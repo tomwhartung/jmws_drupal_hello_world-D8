@@ -24,14 +24,8 @@ class ConfigForm extends ConfigFormBase {
 
     $form['default_count'] = [
       '#type' => 'number',
-      '#title' => $this->t('Default my_hug counttttt'),
+      '#title' => $this->t('Default my_hug count'),
       '#default_value' => $config->get('default_count'),
-    ];
-
-    $form['exp_string'] = [
-      '#type' => 'string',
-      '#title' => $this->t('Experimental string defined in ConfigForm class'),
-	  '#default_value' => $config->get('default_count'),
     ];
 
     $form['exp_textfield'] = [
@@ -44,18 +38,6 @@ class ConfigForm extends ConfigFormBase {
       '#type' => 'number',
       '#title' => $this->t('Experimental number input field defined in ConfigForm class'),
       '#default_value' => $config->get('exp_number'),
-    ];
-
-    $form['exp_radio'] = [
-      '#type' => 'radio',
-      '#title' => $this->t('Experimental radio defined in ConfigForm class'),
-      '#default_value' => $config->get('exp_radio'),
-    ];
-
-    $form['exp_input'] = [
-      '#type' => 'input',
-      '#title' => $this->t('Experimental input defined in ConfigForm class'),
-      '#default_value' => $config->get('exp_input'),
     ];
 
     $form['exp_textarea'] = [
@@ -98,8 +80,6 @@ class ConfigForm extends ConfigFormBase {
       '#description' => $this->t( 'Select whether the jQuery Header and Footer Nav Menu should appear on phones.' ),
       '#required' => FALSE,
    );
-
-   $jqueryMobileThemeChoices = array( 'a', 'b', 'c', 'd', 'e', 'f' );
    
     return parent::buildForm($form, $form_state);
   }
