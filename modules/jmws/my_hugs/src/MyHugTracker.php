@@ -2,10 +2,12 @@
 
 namespace Drupal\my_hugs;
 
-use Drupal\Core\State\StateInterface;
+// use Drupal\my_hugs\TeachMe;         // (0)
 use Drupal\my_hugs\LearningMore;
 use Drupal\my_hugs\Heirarchy\SubClass;
 use Drupal\my_hugs\Heirarchy\TheBase;
+
+use Drupal\Core\State\StateInterface;
 
 
 class MyHugTracker {
@@ -17,7 +19,10 @@ class MyHugTracker {
 
   public function __construct(StateInterface $state) {
     $this->state = $state;
-
+    //
+    // (0) We do NOT need the use statement here, but it doesn't hurt
+    //    because TeachMe is in this same namespace, so it is autoloaded
+    //
     $teachMe = new TeachMe( 'MyHugTracker constructor' );
 	// $learningMore = new LearningMore();
 	// $learningMore = new Drupal\idmygadget\LearningMore\LearningMore();

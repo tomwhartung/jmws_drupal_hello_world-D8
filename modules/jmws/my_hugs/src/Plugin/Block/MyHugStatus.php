@@ -2,20 +2,20 @@
 
 namespace Drupal\my_hugs\Plugin\Block;
 
+//
+// Using this code to help understand how the namespaces, use statements, and autoloading all work together
+// For details, see the comments in the build method.
+//
+use Drupal\my_hugs\TeachMe;         // (0)
+use Drupal\my_hugs\LearningMore;    // (1)
+// use Drupal\my_hugs\LearningMore\LearningMore;  // (2)
+use Drupal\my_hugs\JmwsIdMyGadget;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\my_hugs\MyHugTracker;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-//
-// Using this code to help understand how the namespaces, use statements, and autoloading all work together
-// For details, see the comments in the build method.
-//
-use Drupal\my_hugs\TeachMe;         // (0)
-use Drupal\my_hugs\LearningMore;   // (1)
-// use Drupal\my_hugs\LearningMore\LearningMore;  // (2)
-use Drupal\my_hugs\JmwsIdMyGadget;
 
 /**
  * Reports on myHugability status.
@@ -72,8 +72,10 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     else {
       $message = $this->t('Srsly wtf, no my_hugs :-(');
     }
-
-    // (0) 
+    //
+    // (0) We need the "use Drupal\my_hugs\TeachMe;" statement, else we get this error:
+    //   "Class 'Drupal\\my_hugs\\Plugin\\Block\\TeachMe' not found"
+    //
     $teachMe = new TeachMe( 'MyHugStatus::build()' );
 
 	// $jmwsIdMyGadget = new \Drupal\idmygadget\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
