@@ -16,7 +16,9 @@ use Drupal\my_hugs\Heirarchy;               // (2b) trivial inheritance example 
 
 use Jmws\myservice\JmwsService;         // (3) we should really put the IdMyGadget code in vendor
 use Jmws\myservice\JmwsServiceDrupal;   // (3) we should really put the IdMyGadget code in vendor
-// use Jmws\myservice;         // (3) we should really put the IdMyGadget code in vendor
+// use Jmws\myservice;                  // (3) we should really put the IdMyGadget code in vendor
+
+use Drupal\my_hugs\GoGlobal;            // (4) for now just create a global object, like we do for WP and Joomla
 
 use Drupal\my_hugs\JmwsIdMyGadget;
 
@@ -114,6 +116,13 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     //
     // $jmwsService = new \Jmws\myservice\JmwsService( 'MyHugStatus::build()' );
     // $jmwsServiceDrupal = new \Jmws\myservice\JmwsServiceDrupal( 'MyHugStatus::build()' );
+
+    // --------------------------------------
+    // (4) Create a namespaced and global object using the non-namespaced (global) idmygadget code in a separate directory
+    //
+    $namespacedObject = new \Drupal\my_hugs\GoGlobal\NamespacedService( 'MyHugStatus::build()' );
+    // $serviceObject = new \Drupal\my_hugs\GoGlobal\GlobalService( 'MyHugStatus::build()' );
+    // $serviceSubclassObject = new \Drupal\my_hugs\GoGlobal\GlobalServiceDrupal( 'MyHugStatus::build()' );
 
     // $jmwsIdMyGadget = new \Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
     // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
