@@ -120,7 +120,7 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // --------------------------------------
     // (4) Create a namespaced and global object using the non-namespaced (global) idmygadget code in a separate directory
     //
-    $namespacedObject = new \Drupal\my_hugs\GoGlobal\NamespacedService( 'MyHugStatus::build()' );
+    // $namespacedObject = new \Drupal\my_hugs\GoGlobal\NamespacedService( 'MyHugStatus::build()' );
     // $serviceObject = new \Drupal\my_hugs\GoGlobal\GlobalService( 'MyHugStatus::build()' );
     // $serviceSubclassObject = new \Drupal\my_hugs\GoGlobal\GlobalServiceDrupal( 'MyHugStatus::build()' );
 
@@ -128,28 +128,8 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
     // $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
 
-	if ( class_exists('TeachMe') ) {
-		$message .= '<br />TeachMe is a class!';
-	}
-	else {
-		$message .= '<br />Oops TeachMe is a NOT class.';
-	}
+    $message .= '<br />Your message here.';
 
-	if ( class_exists('BlockBase') ) {
-		$message .= '<br />BlockBase is a class!';
-	}
-	else {
-		$message .= '<br />Oops BlockBase is a NOT class.';
-	}
-
-	if ( class_exists('MyHugStatus') ) {
-		$message .= '<br />MyHugStatus is a class!';
-	}
-	else {
-		$message .= '<br />Oops MyHugStatus is a NOT class.';
-	}
-
-    
     return [
       '#markup' => $message,
     ];
