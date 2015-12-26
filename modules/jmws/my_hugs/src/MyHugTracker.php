@@ -23,11 +23,13 @@ class MyHugTracker {
   public function __construct(StateInterface $state) {
     $this->state = $state;
     //
+    // --------------------------------------
     // (0) We do NOT need the use statement here, but it doesn't hurt
     //    because TeachMe is in this same namespace, so it is autoloaded
     //
     // $teachMe = new TeachMe( 'MyHugTracker constructor' );
     //
+    // --------------------------------------
     // (1a) works with (1a) only
     // $learningMore = new LearningMore( 'MyHugTracker constructor' );
     //
@@ -37,15 +39,17 @@ class MyHugTracker {
     // works with either (1a) OR (1b) but NOT BOTH
     // $learningMore = new \Drupal\idmygadget\LearningMore\LearningMore( 'MyHugTracker constructor' );
     //
+    // --------------------------------------
     // (2a) Autoloading with inheritance can be a little tricky
-    // If we do not pull in TheBase class by creating the baseObject we get an error
-    // Ie. "Class 'Drupal\\idMyGadget\\Heirarchy\\TheBase' not found"
-    // This happens even though we have a use statement explicitly for TheBase
-    // (And it seems kinda fucked up to me....)
     // (2b) Using just the one "use" works just as well as using both (2a) use statements
+    // Interesting: I am not seeing this after adding this code to the MyHugStatus class?!?
+    // // If we do not pull in TheBase class by creating the baseObject we get an error
+    // // Ie. "Class 'Drupal\\idMyGadget\\Heirarchy\\TheBase' not found"
+    // // This happens even though we have a use statement explicitly for TheBase
+    // // (And it seems kinda fucked up to me....)
     //
-    $baseObject = new \Drupal\idmygadget\Heirarchy\TheBase( 'MyHugTracker constructor' );
-    $subObject = new \Drupal\idmygadget\Heirarchy\SubClass( 'MyHugTracker constructor' );
+    // $baseObject = new \Drupal\my_hugs\Heirarchy\TheBase( 'MyHugTracker constructor' );
+    $subObject = new \Drupal\my_hugs\Heirarchy\SubClass( 'MyHugTracker constructor' );
 
   }
 

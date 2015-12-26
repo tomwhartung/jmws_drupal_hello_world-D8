@@ -1,5 +1,5 @@
 <?php
-namespace Drupal\idMyGadget\Heirarchy;
+namespace Drupal\my_hugs\Heirarchy;
 
 class TheBase {
 	public function __construct( $createdBy='' ) {

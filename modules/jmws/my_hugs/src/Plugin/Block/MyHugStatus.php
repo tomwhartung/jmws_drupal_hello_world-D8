@@ -10,6 +10,10 @@ use Drupal\my_hugs\TeachMe;                     // (0) source in same directory 
 use Drupal\my_hugs\LearningMore\LearningMore;   // (1a) source in sub dir and different namespace
 // use Drupal\my_hugs\LearningMore;             // (1b) source in sub dir and different namespace
 
+// use Drupal\my_hugs\Heirarchy\SubClass;   // (2a) trivial inheritance example - subclass
+// use Drupal\my_hugs\Heirarchy\TheBase;    // (2a) trivial inheritance example - base class
+use Drupal\my_hugs\Heirarchy;               // (2b) trivial inheritance example - namespace 
+
 use Drupal\my_hugs\JmwsIdMyGadget;
 
 use Drupal\Core\Block\BlockBase;
@@ -87,10 +91,14 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // $learningMore = new Drupal\my_hugs\LearningMore\LearningMore( 'MyHugStatus::build()' );
     //
     // (1) works with either (1a) OR (1b) but NOT BOTH
-    $learningMore_1 = new \Drupal\my_hugs\LearningMore\LearningMore( 'MyHugStatus::build() - 1' );
+    // $learningMore_1 = new \Drupal\my_hugs\LearningMore\LearningMore( 'MyHugStatus::build() - 1' );
 
     // --------------------------------------
-    //
+    // (2a) Autoloading with inheritance can be a little tricky
+    // (2b) Using just the one "use" works just as well as using both (2a) use statements
+    // // (See comment in the MyHugTracker class....)
+    // $baseObject = new \Drupal\my_hugs\Heirarchy\TheBase( 'MyHugStatus::build()' );
+    $subObject = new \Drupal\my_hugs\Heirarchy\SubClass( 'MyHugStatus::build()' );
 
   // $jmwsIdMyGadget = new \Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
   // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
