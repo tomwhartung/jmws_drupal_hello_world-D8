@@ -2,10 +2,12 @@
 
 namespace Drupal\my_hugs;
 
-// use Drupal\my_hugs\TeachMe;         // (0)
-use Drupal\my_hugs\LearningMore;
-use Drupal\my_hugs\Heirarchy\SubClass;
-use Drupal\my_hugs\Heirarchy\TheBase;
+// use Drupal\my_hugs\TeachMe;                  // (0) source in same directory and namespace
+use Drupal\my_hugs\LearningMore\LearningMore;   // (1a) source in sub dir and different namespace
+// use Drupal\my_hugs\LearningMore;             // (1b) source in sub dir and different namespace
+
+use Drupal\my_hugs\Heirarchy\SubClass;    // (2)
+use Drupal\my_hugs\Heirarchy\TheBase;     // (2)
 
 use Drupal\Core\State\StateInterface;
 
@@ -23,10 +25,16 @@ class MyHugTracker {
     // (0) We do NOT need the use statement here, but it doesn't hurt
     //    because TeachMe is in this same namespace, so it is autoloaded
     //
-    $teachMe = new TeachMe( 'MyHugTracker constructor' );
-	// $learningMore = new LearningMore();
-	// $learningMore = new Drupal\idmygadget\LearningMore\LearningMore();
-	// $learningMore = new \Drupal\idmygadget\LearningMore\LearningMore( 'GadgetDetector constructor' );
+    // $teachMe = new TeachMe( 'MyHugTracker constructor' );
+    //
+    // (1a) works with (1a) only
+    // $learningMore = new LearningMore( 'MyHugTracker constructor' );
+    //
+    // (1) Does NOT work with either (1a) or (1b)
+    // $learningMore = new Drupal\idmygadget\LearningMore\LearningMore( 'MyHugTracker constructor' );
+    //
+    // works with either (1a) OR (1b) but NOT BOTH
+    $learningMore = new \Drupal\idmygadget\LearningMore\LearningMore( 'MyHugTracker constructor' );
   //
 	// This demonstrates that autoloading with inheritance can be a little tricky
 	// If we do not pull in TheBase class by creating the baseObject we get an error
