@@ -6,8 +6,9 @@ namespace Drupal\my_hugs;
 use Drupal\my_hugs\LearningMore\LearningMore;   // (1a) source in sub dir and different namespace
 // use Drupal\my_hugs\LearningMore;             // (1b) source in sub dir and different namespace
 
-use Drupal\my_hugs\Heirarchy\SubClass;    // (2)
-use Drupal\my_hugs\Heirarchy\TheBase;     // (2)
+// use Drupal\my_hugs\Heirarchy\SubClass;   // (2a) trivial inheritance example - subclass
+// use Drupal\my_hugs\Heirarchy\TheBase;    // (2a) trivial inheritance example - base class
+use Drupal\my_hugs\Heirarchy;               // (2b) trivial inheritance example - namespace 
 
 use Drupal\Core\State\StateInterface;
 
@@ -34,15 +35,17 @@ class MyHugTracker {
     // $learningMore = new Drupal\idmygadget\LearningMore\LearningMore( 'MyHugTracker constructor' );
     //
     // works with either (1a) OR (1b) but NOT BOTH
-    $learningMore = new \Drupal\idmygadget\LearningMore\LearningMore( 'MyHugTracker constructor' );
-  //
-	// This demonstrates that autoloading with inheritance can be a little tricky
-	// If we do not pull in TheBase class by creating the baseObject we get an error
-	// Ie. "Class 'Drupal\\idMyGadget\\Heirarchy\\TheBase' not found"
-	// This happens even though we have a use statement explicitly for TheBase
-	//
-	// $baseObject = new \Drupal\idmygadget\Heirarchy\TheBase( 'MyHugTracker constructor' );
-	// $subObject = new \Drupal\idmygadget\Heirarchy\SubClass( 'MyHugTracker constructor' );
+    // $learningMore = new \Drupal\idmygadget\LearningMore\LearningMore( 'MyHugTracker constructor' );
+    //
+    // (2a) Autoloading with inheritance can be a little tricky
+    // If we do not pull in TheBase class by creating the baseObject we get an error
+    // Ie. "Class 'Drupal\\idMyGadget\\Heirarchy\\TheBase' not found"
+    // This happens even though we have a use statement explicitly for TheBase
+    // (And it seems kinda fucked up to me....)
+    // (2b) Using just the one "use" works just as well as using both (2a) use statements
+    //
+    $baseObject = new \Drupal\idmygadget\Heirarchy\TheBase( 'MyHugTracker constructor' );
+    $subObject = new \Drupal\idmygadget\Heirarchy\SubClass( 'MyHugTracker constructor' );
 
   }
 
