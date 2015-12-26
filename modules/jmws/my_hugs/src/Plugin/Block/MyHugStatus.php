@@ -14,6 +14,10 @@ use Drupal\my_hugs\LearningMore\LearningMore;   // (1a) source in sub dir and di
 // use Drupal\my_hugs\Heirarchy\TheBase;    // (2a) trivial inheritance example - base class
 use Drupal\my_hugs\Heirarchy;               // (2b) trivial inheritance example - namespace 
 
+use Jmws\myservice\JmwsService;         // (3) we should really put the IdMyGadget code in vendor
+use Jmws\myservice\JmwsServiceDrupal;   // (3) we should really put the IdMyGadget code in vendor
+// use Jmws\myservice;         // (3) we should really put the IdMyGadget code in vendor
+
 use Drupal\my_hugs\JmwsIdMyGadget;
 
 use Drupal\Core\Block\BlockBase;
@@ -98,11 +102,22 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // (2b) Using just the one "use" works just as well as using both (2a) use statements
     // // (See comment in the MyHugTracker class....)
     // $baseObject = new \Drupal\my_hugs\Heirarchy\TheBase( 'MyHugStatus::build()' );
-    $subObject = new \Drupal\my_hugs\Heirarchy\SubClass( 'MyHugStatus::build()' );
+    // $subObject = new \Drupal\my_hugs\Heirarchy\SubClass( 'MyHugStatus::build()' );
 
-  // $jmwsIdMyGadget = new \Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
-  // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
-  // $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
+    // --------------------------------------
+    // (3) the idmygadget code should really be in the vendor directory
+    //
+    // Based on my understanding of these pages:
+    // https://www.drupal.org/node/2156625 and especially
+    // https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md - Symfony Example
+    // What I have should work.  Fuuuuuck ok I will try another technique
+    //
+    // $jmwsService = new \Jmws\myservice\JmwsService( 'MyHugStatus::build()' );
+    // $jmwsServiceDrupal = new \Jmws\myservice\JmwsServiceDrupal( 'MyHugStatus::build()' );
+
+    // $jmwsIdMyGadget = new \Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
+    // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
+    // $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
 
 	if ( class_exists('TeachMe') ) {
 		$message .= '<br />TeachMe is a class!';
