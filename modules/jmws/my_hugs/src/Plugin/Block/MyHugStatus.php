@@ -6,9 +6,10 @@ namespace Drupal\my_hugs\Plugin\Block;
 // Using this code to help understand how the namespaces, use statements, and autoloading all work together
 // For details, see the comments in the build method.
 //
-use Drupal\my_hugs\TeachMe;         // (0)
-use Drupal\my_hugs\LearningMore;    // (1)
-// use Drupal\my_hugs\LearningMore\LearningMore;  // (2)
+use Drupal\my_hugs\TeachMe;                     // (0) source in same directory and namespace
+use Drupal\my_hugs\LearningMore\LearningMore;   // (1a) source in sub dir and different namespace
+// use Drupal\my_hugs\LearningMore;             // (1b) source in sub dir and different namespace
+
 use Drupal\my_hugs\JmwsIdMyGadget;
 
 use Drupal\Core\Block\BlockBase;
@@ -72,28 +73,28 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     else {
       $message = $this->t('Srsly wtf, no my_hugs :-(');
     }
-    //
+    // --------------------------------------
     // (0) We need the "use Drupal\my_hugs\TeachMe;" statement, else we get this error:
     //   "Class 'Drupal\\my_hugs\\Plugin\\Block\\TeachMe' not found"
-    //
-    $teachMe = new TeachMe( 'MyHugStatus::build()' );
+    // $teachMe = new TeachMe( 'MyHugStatus::build()' );
 
-	// $jmwsIdMyGadget = new \Drupal\idmygadget\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
-	// $jmwsIdMyGadget = new Drupal\idmygadget\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
-	// $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
-	//
-	// (1) and (2) Does NOT work in either case, it looks for the class inside of this namespace
-	// ie: "Class 'Drupal\\idmygadget\\Plugin\\Block\\Drupal\\idmygadget\\LearningMore\\LearningMore' not found"
-	// $learningMore = new Drupal\idmygadget\LearningMore\LearningMore( 'IdMyGadgetStatus::build()' );
-	// 
-	// (1) Works when we "use Drupal\idmygadget\LearningMore;"
-	// (2)            OR "use Drupal\idmygadget\LearningMore\LearningMore;"
-	// $learningMore_1 = new \Drupal\idmygadget\LearningMore\LearningMore( 'IdMyGadgetStatus::build() - 1' );
-	//
-	// (1) Does NOT work when we ""
-	// ie: "Class 'Drupal\\idmygadget\\LearningMore' not found..."
-	// (2) Works when we "use Drupal\idmygadget\LearningMore\LearningMore;"
-	// $learningMore_2 = new LearningMore( 'IdMyGadgetStatus::build() - 2' );
+    // --------------------------------------
+    // (1a) works with (1a) only
+    // $learningMore = new LearningMore( 'MyHugStatus::build()' );
+    //
+    // (1) Does NOT work with either (1a) or (1b), it looks for the class inside of this namespace
+    // ie: "Class 'Drupal\\my_hugs\\Plugin\\Block\\Drupal\\my_hugs\\LearningMore\\LearningMore' not found"
+    // $learningMore = new Drupal\my_hugs\LearningMore\LearningMore( 'MyHugStatus::build()' );
+    //
+    // (1) works with either (1a) OR (1b) but NOT BOTH
+    $learningMore_1 = new \Drupal\my_hugs\LearningMore\LearningMore( 'MyHugStatus::build() - 1' );
+
+    // --------------------------------------
+    //
+
+  // $jmwsIdMyGadget = new \Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
+  // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
+  // $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
 
 	if ( class_exists('TeachMe') ) {
 		$message .= '<br />TeachMe is a class!';

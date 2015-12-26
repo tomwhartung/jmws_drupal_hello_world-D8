@@ -30,7 +30,7 @@ class MyHugTracker {
     // (1a) works with (1a) only
     // $learningMore = new LearningMore( 'MyHugTracker constructor' );
     //
-    // (1) Does NOT work with either (1a) or (1b)
+    // (1) Does NOT work with either (1a) or (1b), it looks for the class inside of this namespace
     // $learningMore = new Drupal\idmygadget\LearningMore\LearningMore( 'MyHugTracker constructor' );
     //
     // works with either (1a) OR (1b) but NOT BOTH
