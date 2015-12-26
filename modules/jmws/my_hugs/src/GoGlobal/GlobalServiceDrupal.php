@@ -1,12 +1,14 @@
 <?php
-namespace;
+namespace {
+  require GlobalService.php;
 
-class GlobalServiceDrupal extends GlobalService {
-	public function __construct( $createdBy='' ) {
-		error_log( 'This GlobalServiceDrupal object was created by ' . $createdBy . '.' );
-	}
+  class GlobalServiceDrupal extends GlobalService {
+    public function __construct( $createdBy='' ) {
+      error_log( 'This GlobalServiceDrupal object was created by ' . $createdBy . '.' );
+    }
 
-	public function logToday() {
-		error_log( 'GlobalServiceDrupal class is logging today.' );
-	}
+    public function logToday() {
+      error_log( 'GlobalServiceDrupal class is logging today.' );
+    }
+  }
 }
