@@ -102,10 +102,12 @@ class MyHugTracker {
     // (4) for now just create a global idmygadget object, like we do for WP and Joomla
     // I.e., Create a namespaced and global object using the non-namespaced (global) idmygadget code in a separate directory
     //
+    /*
     $namespacedObject = new \Drupal\my_hugs\GoGlobal\NamespacedService( 'MyHugTracker constructor' );
     $serviceObject = $namespacedObject->getGlobalServiceObject();
     $this->service = $serviceObject;
     $this->service->logToday( 'Hi hello how are you - from the MyHugTracker constructor!!' );
+     */
   }
 
   /**
