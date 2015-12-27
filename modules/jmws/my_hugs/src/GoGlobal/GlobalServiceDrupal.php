@@ -17,7 +17,7 @@ namespace {
       } else {
         error_log( 'GlobalServiceDrupal message is: ' . $message );
       }
-      parent::logToday();
+      parent::logToday( $message );
     }
   }
 }
