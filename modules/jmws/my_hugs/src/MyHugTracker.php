@@ -22,10 +22,18 @@ use Drupal\Core\State\StateInterface;
 class MyHugTracker {
 
   /**
+   * The state is/was used for the hugs functionality, we are not really using it anymore, but
+   * it is here for possible future reference
    * @var \Drupal\Core\State\StateInterface
    */
   protected $state;
 
+  /**
+   * For now, we are using global (non-namespaced) code to create our service
+   * All Drupal code should use this class and the getService method to get this service
+   *   rather !han access the global service object globally.
+   * @var type
+   */
   protected $service = null;
 
   /**
@@ -89,6 +97,8 @@ class MyHugTracker {
     // $jmwsServiceDrupal = new \Jmws\myservice\JmwsServiceDrupal( 'MyHugTracker constructor' );
 
     // --------------------------------------
+    // This is the pattern we will use - for the time being
+    // --------------------------------------
     // (4) for now just create a global idmygadget object, like we do for WP and Joomla
     // I.e., Create a namespaced and global object using the non-namespaced (global) idmygadget code in a separate directory
     //
@@ -98,12 +108,17 @@ class MyHugTracker {
     $this->service->logToday( 'Hi hello how are you - from the MyHugTracker constructor!!' );
   }
 
+  /**
+   * Returns the global service object that we have saved as a data member
+   * Because the plan is to not rely on the global service object forever
+   * @return type
+   */
   public function getService() {
     return $this->service;
   }
 
   /**
-   * We are not doing hugs much anymore so this method is rather obsolete
+   * We are not doing hugs much anymore so this method is pretty much obsolete
    * @param type $target_name
    * @return \Drupal\my_hugs\MyHugTracker
    */
@@ -112,6 +127,11 @@ class MyHugTracker {
     return $this;
   }
 
+  /**
+   * We are not doing hugs much anymore so this method is pretty much obsolete
+   *
+   * @return type
+   */
   public function getLastRecipient() {
     return $this->state->get('my_hugs.last_recipient');
   }
