@@ -131,6 +131,8 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // $jmwsServiceDrupal = new \Jmws\myservice\JmwsServiceDrupal( 'MyHugStatus::build()' );
 
     // --------------------------------------
+    // This is the pattern we will use - for the time being
+    // --------------------------------------
     // (4) Create a namespaced and global object using the non-namespaced (global) idmygadget code in a separate directory
     //
     // $namespacedObject = new \Drupal\my_hugs\GoGlobal\NamespacedService( 'MyHugStatus::build()' );
@@ -141,10 +143,12 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
     // $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
 
-    // $message .= '<br />Want to use our service to log messages so we know it can do that....';
+    $message .= '<br />Not using our service to log messages right now.';
+    /*
     $message .= '<br />Using our service to log messages so we know it can do that.';
     $this->service = $this->myHugTracker->getService();
     $this->service->logToday( 'Hi from MyHugStatus::build()!!' );
+     */
 
     return [
       '#markup' => $message,
