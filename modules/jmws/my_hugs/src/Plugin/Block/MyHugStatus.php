@@ -141,10 +141,10 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
     // $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
 
-    $message .= '<br />Want to use our service to log messages so we know it can do that....';
-    // $message .= '<br />Using our service to log messages so we know it can do that.';
-    // $this->service = $this->myHugTracker->getService();
-    // $this->service->logToday( 'Hi from MyHugStatus::build()!!' );
+    // $message .= '<br />Want to use our service to log messages so we know it can do that....';
+    $message .= '<br />Using our service to log messages so we know it can do that.';
+    $this->service = $this->myHugTracker->getService();
+    $this->service->logToday( 'Hi from MyHugStatus::build()!!' );
 
     return [
       '#markup' => $message,
