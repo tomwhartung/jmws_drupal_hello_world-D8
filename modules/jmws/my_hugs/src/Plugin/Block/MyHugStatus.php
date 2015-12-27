@@ -40,9 +40,22 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
+   * When it comes to hugs, MyHugTracker is a service
+   * In this case, having experimented with a few different ways of doing this,
+   * we are mainly using it to get a global service, rather than worry about doing it the
+   * right way right now, which I presume would entail putting the IdMyGadget code into vendor
+   * (was unable to do this based on current documentation, links provided below) and
+   * making it all namespaced (not sure whether that would be necessary).
    * @var \Drupal\my_hugs\MyHugTracker
    */
   protected $myHugTracker;
+  /**
+   * This is our service, which in this case is trivial (writes to the error log)
+   * The important thing is it is a global service object, that we can reference in the
+   * new style drupal nanespaced code, via the MyHugTracker class (myHugTracker object)
+   * @var type
+   */
+  protected $service;
 
   public function __construct(array $configuration, $plugin_id, $plugin_definition, MyHugTracker $myHugTracker) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
@@ -128,7 +141,10 @@ class MyHugStatus extends BlockBase implements ContainerFactoryPluginInterface {
     // $jmwsIdMyGadget = new Drupal\my_hugs\JmwsIdMyGadget\JmwsIdMyGadgetDrupal();
     // $jmwsIdMyGadget = new JmwsIdMyGadgetDrupal();
 
-    $message .= '<br />Your message here.';
+    $message .= '<br />Want to use our service to log messages so we know it can do that....';
+    // $message .= '<br />Using our service to log messages so we know it can do that.';
+    // $this->service = $this->myHugTracker->getService();
+    // $this->service->logToday( 'Hi from MyHugStatus::build()!!' );
 
     return [
       '#markup' => $message,
