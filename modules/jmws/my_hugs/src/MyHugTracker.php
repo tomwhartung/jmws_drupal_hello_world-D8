@@ -26,6 +26,18 @@ class MyHugTracker {
    */
   protected $state;
 
+  protected $service = null;
+
+  /**
+   * Try out ways of defining namespaces and external classes so we can have a service that
+   * is created in global non-namespaced code.
+   * This service is not really a hugtracker but more a stub of the global jmwsIdMyGadget object
+   * we are using in WP and Joomla.
+   * Yes the service should be in vendor (see case (3)),
+   * but I tried that and couldn't get it to work (quickly)
+   * 
+   * @param StateInterface $state
+   */
   public function __construct(StateInterface $state) {
     $this->state = $state;
     //
@@ -74,20 +86,27 @@ class MyHugTracker {
     //  This gives a "Class 'Jmws\\myservice\\JmwsService' not found" error
     // $jmwsService = new JmwsService( 'MyHugStatus::build()' );
     //
-    // $jmwsServiceDrupal = new \Jmws\myservice\JmwsServiceDrupal( 'MyHugStatus::build()' );
+    // $jmwsServiceDrupal = new \Jmws\myservice\JmwsServiceDrupal( 'MyHugTracker constructor' );
 
     // --------------------------------------
     // (4) for now just create a global idmygadget object, like we do for WP and Joomla
     // I.e., Create a namespaced and global object using the non-namespaced (global) idmygadget code in a separate directory
     //
-    $namespacedObject = new \Drupal\my_hugs\GoGlobal\NamespacedService( 'MyHugStatus::build()' );
-    // $serviceObject = new \Drupal\my_hugs\GoGlobal\GlobalService( 'MyHugStatus::build()' );
-    // $serviceSubclassObject = new \Drupal\my_hugs\GoGlobal\GlobalServiceDrupal( 'MyHugStatus::build()' );
-
-
-
+    $namespacedObject = new \Drupal\my_hugs\GoGlobal\NamespacedService( 'MyHugTracker constructor' );
+    $serviceObject = $namespacedObject->getGlobalServiceObject();
+    $this->service = $serviceObject;
+    $this->service->logToday( 'Hi hello how are you - from the MyHugTracker constructor!!' );
   }
 
+  public function getService() {
+    return $this->service;
+  }
+
+  /**
+   * We are not doing hugs much anymore so this method is rather obsolete
+   * @param type $target_name
+   * @return \Drupal\my_hugs\MyHugTracker
+   */
   public function addMyHug($target_name) {
     $this->state->set('my_hugs.last_recipient', $target_name);
     return $this;
