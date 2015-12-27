@@ -1,5 +1,5 @@
 <?php
-namespace {
+// namespace {
 
   class GlobalService {
     public function __construct( $createdBy='' ) {
@@ -17,4 +17,4 @@ namespace {
       }
     }
   }
-}
+// }

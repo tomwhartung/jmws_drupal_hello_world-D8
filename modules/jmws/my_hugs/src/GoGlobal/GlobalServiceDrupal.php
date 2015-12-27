@@ -1,5 +1,5 @@
 <?php
-namespace {
+// namespace {
   require 'GlobalService.php';
 
   class GlobalServiceDrupal extends GlobalService {
@@ -20,4 +20,4 @@ namespace {
       parent::logToday( $message );
     }
   }
-}
+// }
