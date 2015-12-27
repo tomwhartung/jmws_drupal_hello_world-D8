@@ -7,6 +7,15 @@ namespace Drupal\my_hugs\GoGlobal {
     }
 
     /**
+     * Returns the global service object created in the non-namespaced code below
+     * @global type $globalServiceObject
+     * @return type
+     */
+    public function getGlobalServiceObject() {
+      global $globalServiceObject;
+      return $globalServiceObject;
+    }
+    /**
      * Unused (so far) function for our trivial class
      */
     public function logToday() {
